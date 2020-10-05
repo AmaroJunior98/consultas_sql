@@ -1,4 +1,4 @@
--- Crie um banco de dados através do comando <create databases nome_banco_de_dados> ex: <create database exercicios;>
+-- Crie um banco de dados através do comando <create database nome_banco_de_dados> ex: <create database exercicios;>
 -- Utilize do comando <use o_banco_de_dados> ex: <use exercicios;>
 -- Necessário a criação correta de 4 sequencias para adicionar novos passageirios, pilotos, voos e milhas
 -- sequencias estruturas que substituem o auto_increment
@@ -19,7 +19,7 @@ create table passageiro (
 create table piloto (
 	codigo int default (next value for sequencia2),
 	nome varchar(150),
-	num_voos varchar(150),
+	num_voos int,
     
     constraint pk_piloto primary key(codigo)
 );
@@ -48,10 +48,8 @@ create table passageiro_voo (
 
 create table milhas (
 	codigo int default (next value for sequencia4),
-	piloto varchar(150),
     passageiro int,
-	num_passageiros varchar(150),
-    distancia int,
+    qtde int,
     
     foreign key (passageiro) references passageiro(codigo),
     constraint pk_milhas primary key(codigo)
