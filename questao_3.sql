@@ -2,6 +2,7 @@
 -- Utilize do comando <use o_banco_de_dados> ex: <use exercicios;>
 -- Necessário a criação correta de 4 sequencias para adicionar novos passageirios, pilotos, voos e milhas
 -- sequencias estruturas que substituem o auto_increment
+
 create sequence sequencia start with 1 increment by 1;
 create sequence sequencia2 start with 1 increment by 1;
 create sequence sequencia3 start with 1 increment by 1;
@@ -28,8 +29,8 @@ create table voo (
 	codigo int default (next value for sequencia3),
 	piloto int,
 	tipo varchar(150),
-    num_passageiros varchar(150),
-    distancia int,
+    num_passageiros int default 0,
+    distancia int default 0,
     
     foreign key (piloto) references piloto(codigo),
     constraint pk_voo primary key(codigo)
@@ -38,7 +39,7 @@ create table voo (
 
 create table passageiro_voo (
 	passageiro int,
-    voo int,
+    voo int default 0,
 	classe varchar(150),
     
     foreign key (passageiro) references passageiro(codigo),
@@ -48,8 +49,8 @@ create table passageiro_voo (
 
 create table milhas (
 	codigo int default (next value for sequencia4),
-    passageiro int,
-    qtde int,
+    passageiro int default 0,
+    qtde int default 0,
     
     foreign key (passageiro) references passageiro(codigo),
     constraint pk_milhas primary key(codigo)
