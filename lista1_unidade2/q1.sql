@@ -1,10 +1,10 @@
-delimiter $$
-create function idade(data_nasc int) returns int 
+delimiter $
+create function idade(int data_nasc) returns int
 	begin
-		declare data_nasc int;
-		set data_nasc = (select extract(year from dataNasc) from funcionario);
-		return data_nasc;
-	end //
-delimiter $;
+		set @data_nasc = (select datediff(year, 'dataNasc', getdate())
+						  from funcionario f 
+                          where f.codigo = codigo);
+		return @data_nasc;
+	end $
+delimiter;
 
-select idade(dataNasc) from funcionario;
